@@ -1,0 +1,30 @@
+
+<th:block layout:decorate="~{index.html}" layout:fragment="main">
+<div class="row "  >
+    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12"></div>
+    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+
+        <form action="" method="post" th:action="@{/search-city}">
+            <!-- <input name="_csrf_token" id="_csrf_token" type="hidden" value="{{ csrf_token() }}" /> -->
+            
+            <div class="form-group">
+                <label for="city">Name of the city</label>
+                <input type="text" class="form-control" id="city" placeholder="Oulu, London, ..." name="city" th:field="*{weatherInfo.city}">
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+    </div>
+
+    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12"></div>
+    </div>
+
+	<th:block th:if="${error != null}">
+	    <div class="row">
+	        <p class="error">
+	            <strong>Error:</strong> <p th:text="${error}"></p>
+	        </p>
+	    </div>
+	</th:block>
+</th:block>
+

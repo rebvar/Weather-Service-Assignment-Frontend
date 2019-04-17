@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" rel="stylesheet" media="screen" />
+	<link href="https//netdna.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap-glyphicons.css" rel="stylesheet">
+	<th:block th:if="${user==null}">
+    <title>Welcome!</title>
+    </th:block>    
+    <th:block th:if="${user!=null}">
+    <title th:text="${'Welcome '+user.get('name')+'!'}"></title>
+    </th:block>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="header">
+      <a class="navbar-brand" th:href="@{'/'}">NORTASK</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" th:href="@{'/'}">Home <span class="sr-only">(current)</span></a>
+          </li>
+          
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarExperiments" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Weather
+            </a>
+            
+            
+            <div class="dropdown-menu" aria-labelledby="navbarExperiments">
+              <th:block th:if="${user!=null}">
+              <a class="dropdown-item" th:href="@{'/my-searches'}">My searches</a>
+              <a class="dropdown-item" th:href="@{'/my-favorites'}">My favorites</a>
+              </th:block>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" th:href="@{'/search-city'}">Search by city</a>
+              <a class="dropdown-item" th:href="@{'/search-coord'}">Search by coordinates</a>
+              
+            </div>
+          </li>
+          
+          <li class="nav-item">
+		<a class="nav-link" th:href="@{'/search-city'}">Search by City</a>
+		</li>
+            <li class="nav-item"><a class="nav-link" th:href="@{'/search-coord'}">Search by Coordinates</a>
+			</li>
+
+		<th:block th:if="${user!=null}">
+              <li class="nav-item">
+
+                <a class="nav-link" th:href="@{'/users'}" th:text="${'welcome ' + user.getString('name')+'!'}"></a>
+            </li>
+              
+			  <li class="nav-item">
+
+                <a class="nav-link" th:href="@{'/signout'}">Sign out</a>
+            </li>
+			</th:block>
+
+			
+
+			<th:block th:if="${user == null}">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{'/signin'}">Sign in</a>                
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{'/signup'}">Sign up</a>
+            </li>
+            
+            </th:block>
+        </ul>
+        <!-- 
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Oulu, Helsinki, London, ..." aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+         -->
+      </div>
+    </nav>
+
+
+</body>
+</html>

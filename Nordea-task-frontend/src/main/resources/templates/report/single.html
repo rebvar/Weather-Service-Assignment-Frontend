@@ -1,0 +1,100 @@
+
+<th:block layout:decorate="~{index.html}" layout:fragment="main">
+
+
+<div th:if="${sortedKeys!=null and #lists.size(sortedKeys)>0}" class="container">
+
+	<th:block th:if="${user!=null}">
+	<div class="row">
+	
+	<div class="col-md-2">
+	<pre> </pre>
+	</div>
+	<div class="col-md-3">
+	<a th:href="@{'/my-searches'}">My searches</a>
+	</div> 
+	
+	<div class="col-md-3">
+	<a th:href="@{'/my-favorites'}">My favorites</a>
+	</div> 
+	 
+	 
+	</div>
+	</th:block>
+	
+	
+	<div class="row">
+	
+	<div class="col-md-12">
+	<hr>
+	</div>
+	
+	</div>
+	
+
+	<div class="row" th:if="${city!=null}"><div class="col-md-12"><h3>Search for city:</h3><h2 th:text="${city}"></h2></div></div>	
+
+
+	<div class="row">
+	<div class="col-md-12">
+		<div th:each="key: ${sortedKeys}" class="row">
+			<div class="col-md-2">
+			<pre> </pre>
+			</div>
+			<div class="col-md-3"><h4 th:text="${key}" ></h4></div>
+			<div th:text="${':' + weatherInfo.get(key)}" class="col-md-5"></div>
+			<div class="col-md-2">
+			<pre> </pre>
+			</div>
+		</div>
+	</div>
+    </div>
+	<div class="row" th:if="${user!=null}">
+		<a class="btn btn-success" th:href="@{'/favorites/' + ${weatherInfo.get('uniqueId')}}">Add to favorites</a>
+	</div>
+		<div class ="row">
+	<div class="col-md-12">
+	<hr>
+	<br>	
+	<h1>
+	Forecast:
+	</h1>
+	<hr>
+	</div>
+	</div>
+	<div th:if="${forecasts!=null and #lists.size(forecasts)>0}" class="row">
+	
+		<div class="col-md-12">
+		<div  class="row">
+		
+			<div th:each="key: ${fcKeys}" class="col-md-2 border-left border-right">
+				<p th:text="${key}"></p>
+    		</div>
+    	</div>
+    		<div class ="row">
+			<div class="col-md-12">
+			<hr>
+			</div>
+			</div>
+    	
+		<th:block th:each="fc: ${forecasts}">
+			<div  class="row">
+				<div th:each="key: ${fcKeys}" class="col-md-2 border-left border-right">
+					<p th:text="${fc.get(key)}"></p>
+	    		</div>
+	    	</div>
+	    	
+	    	<hr />
+	    </th:block>
+		</div>
+	</div>	
+	
+
+	<th:block th:if="${error != null}">
+	    <div class="row">
+	        <p class="error">
+	            <strong>Error:</strong> <p th:text="${error}"></p>
+	        </p>
+	    </div>
+	</th:block>
+</th:block>

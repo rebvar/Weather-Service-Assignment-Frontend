@@ -1,0 +1,69 @@
+
+
+<th:block layout:decorate="~{index.html}" layout:fragment="main">
+<div class="row "  >
+    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12"></div>
+    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+
+        <form action="" method="post" th:action="@{/signup}" data-toggle="validator" role="form">
+
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" required id="name" placeholder="Name" name="name" th:field="*{userSignup.name}">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email address</label>
+                <input type="email" class="form-control is-valid" id="email" required placeholder="Email" name="email" th:field="*{userSignup.email}" aria-describedby="emailHelp">
+                <div class="help-block with-errors text-danger"></div>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" required name="password" placeholder="Password" th:field="*{userSignup.password}" />
+            </div>
+
+            <div class="form-group">
+                <label for="rep_password">Confirm Password</label>
+                <input type="password" class="form-control" id="rep_password" required name="rep_password" placeholder="Confirm Password" data-match="#password" data-error="Passwords do not match!" />
+                <div class="help-block with-errors text-danger"></div>
+            </div>
+
+<!--
+
+Here is the Recaptcha key. Disabled for now. 
+            <div class="form-group">
+                <div class="g-recaptcha" data-sitekey="{{config.RECAPTCHA_PUBLIC_KEY}}"></div>
+            </div>
+ -->
+
+
+            <button type="submit" class="btn btn-primary">Signup</button>
+        </form>
+    </div>
+
+    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12"></div>
+</div>
+
+	<th:block th:if="${error != null}">
+	    <div class="row">
+	        <p class="error">
+	            <strong>Error:</strong> <p th:text="${error}"></p>
+	        </p>
+	    </div>
+	</th:block>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
+
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+
+</th:block>
+
+<!--
+
+Check this 
+<div layout:decorate="~{index.html}" layout:fragment="scripts">
+
+</div>
+
+ -->

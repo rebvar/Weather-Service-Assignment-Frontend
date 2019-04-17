@@ -1,0 +1,33 @@
+
+<th:block layout:decorate="~{index.html}" layout:fragment="main">
+<div class="row "  >
+    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12"></div>
+    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+
+        <form action="" method="post" th:action="@{/search-coord}">
+            <!-- <input name="_csrf_token" id="_csrf_token" type="hidden" value="{{ csrf_token() }}" /> -->
+            
+            <div class="form-group">
+                <label for="Latitude">Latitude</label>
+                <input type="number" class="form-control" id="lat" placeholder="65" name="lat" th:field="*{weatherInfo.lat}">
+            </div>
+            <div class="form-group">
+                <label for="Longitude">Longitude</label>
+                <input type="number" class="form-control" id="lon" placeholder="23" name="lon" th:field="*{weatherInfo.lon}">
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+    </div>
+
+    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12"></div>
+    </div>
+
+	<th:block th:if="${error != null}">
+	    <div class="row">
+	        <p class="error">
+	            <strong>Error:</strong> <p th:text="${error}"></p>
+	        </p>
+	    </div>
+	</th:block>
+</th:block>
+

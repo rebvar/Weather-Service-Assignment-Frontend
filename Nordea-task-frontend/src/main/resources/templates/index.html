@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" rel="stylesheet" media="screen" />
+
+</head>
+    
+<div th:replace="fragments/header :: header">&nbsp;</div>
+<div class="container" >
+    
+    <th:block  layout:fragment="main">
+    
+    	<div clsss="row">
+    	
+    		<th:block th:if="${user==null}">
+    			<hr />
+    		
+    			<h1> Welcome! </h1>
+    			<br />
+				<h5> <a th:href="@{'/signup'}">Register</a> or <a th:href="@{'/signin'}">login</a> to see your searches and favorites</h5>    			
+    			<br >
+    			<br >
+    			<hr >
+				<br ><p>    <h5> Or search anonymously</h5></p>
+				
+				
+    		</th:block>
+    		
+    		<th:block th:if="${user!=null}">
+    			<hr />
+    		
+    			<h1> Welcome <span th:text="${user.get('name') + '!'}"></h1>
+    			<br />
+				<h5> Check out your previous <a th:href="@{'/my-searches'}">searches</a> and your <a th:href="@{'/my-favorites'}">favorites</a></h5>    			
+    			<br >
+    			<br >
+    			<hr >
+				<br ><p>    <h5> Or start a new search</h5></p>
+					
+    		</th:block>
+    		<a class="btn" th:href="@{'/search-city'}"> Search by city</a>
+			<br> 
+			<a class="btn" th:href="@{'/search-coord'}"> Search by Coordinates</a>
+    		
+    	
+    	</div>	    
+    
+    </th:block>
+    
+   	
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+
+<div layout:fragment="scripts">
+</div>
+</body>
+</html>

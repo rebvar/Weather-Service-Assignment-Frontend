@@ -1,0 +1,70 @@
+
+<th:block layout:decorate="~{index.html}" layout:fragment="main">
+
+<div class="container">
+	
+
+	<th:block th:if="${user!=null}">
+	<div class="row">
+	
+		<div class="col-md-2">
+		<pre> </pre>
+		</div>
+		<div class="col-md-3">
+		<a th:href="@{'/my-searches'}">My searches</a>
+		</div> 
+		
+		<div class="col-md-3">
+		<a th:href="@{'/my-favorites'}">My favorites</a>
+		</div> 
+		 
+	</div>
+	</th:block>
+
+	<div class="row">
+	
+		<div class="col-md-12">
+		<hr>
+		</div>
+	
+	</div>
+	
+
+<th:block th:if="${userSearches!=null and #lists.size(userSearches)>0 and sortedKeys!=null and #lists.size(sortedKeys)>0}">
+
+<div class="row">
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+<div class="row"><h3>User Favorite Searches</h3></div>
+<div class="row">
+<div th:each="key: ${sortedKeys}" class="col-md2 col-lg-2 col-sm-12 col-xs-12 border-right border-left" > <h4 th:text="${key}"></h4></div>
+</div>
+<hr />
+<div th:each="jobj: ${userSearches}" class="row">	
+	<div th:each="key: ${sortedKeys}" class="col-md2 col-lg-2 col-sm-12 col-xs-12 border-right border-left" > <h6 th:text="${jobj.get(key)}"></h6>
+	</div>
+	<div class="col-md2 col-lg-2 col-sm-12 col-xs-12 border-right border-left"><a class="btn btn-primary" th:href="@{'/show-item/'+${jobj.get('uniqueId')}}">More</a></div>
+	<hr />
+</div>
+</div>
+
+</div>
+
+</th:block>
+
+<th:block th:if="${userSearches==null or #lists.size(userSearches)<=0 or sortedKeys==null or #lists.size(sortedKeys)<=0}">
+<hr>
+<p>    <h6> No favorites.</h6></p>
+
+<br ><p> <h6> View your <a th:href="@{'/my-searches'}"> Searches</a> </h6></p>
+ 
+</th:block>
+<th:block th:if="${error != null}">
+	    <div class="row">
+	        <p class="error">
+	            <strong>Error:</strong> <p th:text="${error}"></p>
+	        </p>
+	    </div>
+
+</th:block>
+</th:block>	
